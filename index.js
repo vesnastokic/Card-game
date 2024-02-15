@@ -1,4 +1,4 @@
-//Create a Card Class: Each card will have a suit (e.g., Hearts, Diamonds, Clubs, Spades) and a rank (e.g., Ace, 2, 3, ..., Queen, King).You can represent ranks as numbers for easier comparison.
+//Create a Card Class: Each card will have a suit (Hearts, Diamonds, Clubs, Spades) and a rank (Ace, 2, 3, 4...).
 class Card {
     constructor(suit, rank) {
         this.suit = suit;
@@ -7,7 +7,7 @@ class Card {
 }
 
 
-//Create a Deck Class: The deck will contain 52 cards, one of each suit and rank combination.Methods may include shuffling the deck and dealing cards.
+//Create a Deck Class: The deck will contain 52 cards. Methods to include shuffling the deck and dealing cards.
 
 class Deck {
     constructor() {
@@ -19,8 +19,14 @@ class Deck {
     populateDeck() {
         const suits = ["Hearts", "Diamonds", "Clubs", "Spades"];
         const ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"];
+
+        //for of loop 1
         for (let suit of suits) {
+//    console.log("for of loop 1");
+            //for of loop 2
             for (let rank of ranks) {
+                // console.log("for of loop 2");
+                // console.log("This is my suit:", suit,"This is my rank:", rank);
                 this.cards.push(new Card(suit, rank));
             }
         }
@@ -28,7 +34,12 @@ class Deck {
 
     shuffle() {
         for (let i = this.cards.length - 1; i > 0; i--) {
+            // console.log("code?!?!", i > 0);
+
+            // declares a variable j, it randomizes a number between 1-52
             const j = Math.floor(Math.random() * (i + 1));
+            // console.log("What is j?", j,  this.cards[j]);
+
             [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
         }
     }
@@ -42,7 +53,7 @@ class Deck {
     }
 }
 
-//Create a Player Class: Each player will have a name and a hand of cards. Methods may include adding cards to the hand, playing a card, and checking if the player has any cards left.
+//Create a Player Class: Each player will have a name and a hand of cards. Methods to include adding cards to the hand, playing a card, and checking if the player has any cards left.
 
 class Player {
     constructor(name) {
@@ -65,9 +76,9 @@ class Player {
 }
 
 //Create a Game Class: This class will manage the flow of the game. It will contain instances of the Deck and two Players.
-//Methods may include starting the game, playing rounds, comparing cards, handling ties, and declaring a winner.
+//Methods to include starting the game, playing rounds, comparing cards, handling ties, and a winner.
 //Start the game loop: Each player plays a card. Compare the ranks of the cards played.The player with the higher-ranked card wins the round and takes both cards. In the case of a tie, no cards are won, and the next round begins. The game continues until one player runs out of cards.
-//Declare the winner based on who has cards left in their hand or who has collected all the cards.
+//Winner is who has cards left in their hand or who has collected all the cards.
 
 class Game {
     constructor(player1, player2) {
@@ -124,23 +135,26 @@ game.play();
 //Console Output: Print relevant information to the console to visualize the game progress.This includes which cards are played in each round, who wins each round, and the final winner of the game.
 
 //Testing: Test each class and method individually to ensure they work as expected.
-console.log("Testing Deck class:");
-const deck = new Deck();
-console.log(deck.cards.length === 52); // should output true
-deck.shuffle();
-console.log("Deck shuffled successfully"); // should output message indicating successful shuffle
 
-// Test Player class
-console.log("\nTesting Player class:");
-const player = new Player("Test Player");
-player.addToHand(new Card("Hearts", "Ace"));
-console.log(player.hand.length === 1); // should output true
-const cardPlayed = player.playCard();
-console.log(cardPlayed.rank === "Ace"); // should output true
+(function() {
+    console.log("Testing Deck class:");
+    const deck = new Deck();
+    console.log(deck.cards.length === 52); // should output true
+    deck.shuffle();
+    console.log("Deck shuffled successfully"); // should output message indicating successful shuffle
 
-// Test Game class
-console.log("\nTesting Game class:");
-const player1 = new Player("Player 1");
-const player2 = new Player("Player 2");
-const game = new Game(player1, player2);
-game.play(); // should output game progress and final scores
+    // Test Player class
+    console.log("\nTesting Player class:");
+    const player = new Player("Test Player");
+    player.addToHand(new Card("Hearts", "Ace"));
+    console.log(player.hand.length === 1); // should output true
+    const cardPlayed = player.playCard();
+    console.log(cardPlayed.rank === "Ace"); // should output true
+
+    // Test Game class
+    console.log("\nTesting Game class:");
+    const player1 = new Player("Player 1");
+    const player2 = new Player("Player 2");
+    const game = new Game(player1, player2);
+    game.play(); // should output game progress and final scores
+})();
