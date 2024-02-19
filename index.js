@@ -86,7 +86,7 @@ class Game {
         this.player2 = player2;
     }
 
-    // method to play war game
+    
     play() {
         const deck = new Deck();
         deck.deal(this.player1, this.player2);
